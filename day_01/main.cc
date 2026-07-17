@@ -7,23 +7,20 @@ using namespace std;
 
 class Rotation {
     private:
-        // TODO
         char parse_direction(string str)
         {
-            return 'L';
+            return str[0];
         }
 
-        // TODO
         int parse_distance(string str)
         {
-            return 1;
+            return stoi(str.substr(1));
         }
 
     public:
         char direction;
         int distance;
 
-        // TODO
         Rotation(string str)
         {
             direction = parse_direction(str);
@@ -31,7 +28,6 @@ class Rotation {
         }
 };
 
-// TODO
 vector<Rotation> collect_rotation()
 {
     vector<Rotation> result;
@@ -48,8 +44,6 @@ int turn_dial(int dial, Rotation rotation)
 {
     char direction = rotation.direction;
     int distance = rotation.distance;
-
-    int result = dial;
 
     if (distance == 0) {
         return dial;
@@ -75,7 +69,7 @@ int turn_dial(int dial, Rotation rotation)
         }
     }
 
-    return result;
+    return dial;
 }
 
 int crack_password(vector<Rotation> puzzle)
@@ -96,6 +90,13 @@ int crack_password(vector<Rotation> puzzle)
 
 void test_case()
 {
+    assert(turn_dial(50, Rotation("L0")) == 50);
+    assert(turn_dial(50, Rotation("L15")) == 35);
+    assert(turn_dial(50, Rotation("R10")) == 60);
+    assert(turn_dial(50, Rotation("L50")) == 0);
+    assert(turn_dial(50, Rotation("L51")) == 99);
+    assert(turn_dial(50, Rotation("R49")) == 99);
+    assert(turn_dial(50, Rotation("L50")) == 0);
     vector<Rotation> puzzle1;
     vector<Rotation> puzzle2 = {Rotation("L35")};
     vector<Rotation> puzzle3 = {Rotation("L50")};
@@ -107,23 +108,15 @@ void test_case()
     assert(crack_password(puzzle4) == 1);
     assert(crack_password(puzzle5) == 1);
 
-    assert(turn_dial(50, Rotation("L0")) == 50);
-    assert(turn_dial(50, Rotation("L15")) == 35);
-    assert(turn_dial(50, Rotation("R10")) == 60);
-    assert(turn_dial(50, Rotation("L50")) == 0);
-    assert(turn_dial(50, Rotation("L51")) == 99);
-    assert(turn_dial(50, Rotation("R49")) == 99);
-    assert(turn_dial(50, Rotation("L50")) == 0);
-
     cout << "tests passed!" << endl;
 }
 
 int main()
 {
-    test_case();
+    // test_case();
 
-    // vector<Rotation> puzzle = collect_rotation();
-    // cout << "password: " << crack_password(puzzle) << endl;
+    vector<Rotation> puzzle = collect_rotation();
+    cout << "password: " << crack_password(puzzle) << endl;
 
     return 0;
 }
