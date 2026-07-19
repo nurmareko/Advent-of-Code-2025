@@ -1,0 +1,5 @@
+whishlist
+  + check repeating partern with size adjustment, make sure leading zero doesn't counted
+  + collect invalid id
+  + sum invalid id
+  + parse input
