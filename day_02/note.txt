@@ -1,5 +1,21 @@
+definition
+Range is a pair of number x, y
+
+invalid id
+  + have reapeating pattern twice
+  + we need to dissect the number into two part
+
 whishlist
   + check repeating partern with size adjustment, make sure leading zero doesn't counted
   + collect invalid id
   + sum invalid id
   + parse input
+
+pseudo
+  parse input for ID ranges
+  apply map: [list-of range] -> [list-of invalidID]
+    process each range in list of range
+      loop from starting id to end id
+        check if invalid
+
+  sum invalid IDs
