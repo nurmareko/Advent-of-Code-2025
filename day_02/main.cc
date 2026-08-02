@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <cassert>
 #include <iostream>
 #include <numeric>
 #include <sstream>
@@ -12,9 +13,12 @@ vector<pair<int, int>> parse_input();
 vector<int> get_invalids(vector<pair<int, int>> ranges);
 int get_start(string range);
 int get_finish(string range);
+void test_case();
 
 int main()
 {
+    test_case();
+
     vector<pair<int, int>> ranges = parse_input();
 
     vector<int> invalids = get_invalids(ranges);
@@ -30,12 +34,18 @@ int main()
     return 0;
 }
 
-vector<pair<int, int>> parse_input() {
-    vector<<pair<int, int>> result;
+void test_case()
+{
+    assert(0 == 0);
+}
+
+vector<pair<int, int>> parse_input()
+{
+    vector<pair<int, int>> result;
 
     string range;
     while (getline(cin, range, ',')) {
-        result.pushback(
+        result.push_back(
             make_pair(get_start(range), get_finish(range))
         );
     }
@@ -44,16 +54,37 @@ vector<pair<int, int>> parse_input() {
 }
 
 // TODO
-int get_start(string range) {
-    return 0;
+int get_start(string range)
+{
+    size_t end;
+
+    for (int i = 0; true; i++) {
+        if (range[i] == '-') {
+            end = i - 1;
+            break;
+        }
+    }
+
+    return stoi(range.substr(0, end));
 }
 
 // TODO
-int get_finish(string range) {
-    return 0;
+int get_finish(string range)
+{
+    size_t start;
+
+    for (int i = 0; true; i++) {
+        if (range[i] == '-') {
+            start = i + 1;
+            break;
+        }
+    }
+
+    return stoi(range.substr(start, range.length() - 1));
 }
 
 // TODO
-vector<int> get_invalids(vector<pair<int, int>> ranges) {
+vector<int> get_invalids(vector<pair<int, int>> ranges)
+{
     return {};
 }
