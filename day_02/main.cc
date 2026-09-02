@@ -1,9 +1,6 @@
-#include <algorithm>
 #include <cassert>
-#include <cstdint>
 #include <iostream>
 #include <numeric>
-#include <sstream>
 #include <string>
 #include <utility>
 #include <vector>
@@ -46,8 +43,6 @@ vector<pair<long, long>> parse_input()
 
     string range;
     while (getline(cin, range, ',')) {
-        // DEBUG
-        // cout << "range: " << range << endl;
         result.push_back(
             make_pair(get_start(range), get_finish(range))
         );
@@ -67,8 +62,6 @@ long get_start(string range)
         }
     }
 
-    // DEBUG
-    // cout << "get_start: " << range.substr(0, end) << endl;
     return stol(range.substr(0, end));
 }
 
@@ -83,12 +76,9 @@ long get_finish(string range)
         }
     }
 
-    // DEBUG
-    // cout << "get finish: " << range.substr(start, range.length() - 1) << endl;
     return stol(range.substr(start, range.length() - 1));
 }
 
-// TODO
 vector<long> get_invalids(vector<pair<long, long>> ranges)
 {
     vector<long> invalids = {};
@@ -111,9 +101,5 @@ vector<long> get_invalids(vector<pair<long, long>> ranges)
         }
     }
 
-    // DEBUG
-    // for (long x : invalids) {
-    //     cout << x << endl;
-    // }
     return invalids;
 }
