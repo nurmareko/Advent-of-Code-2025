@@ -34,7 +34,21 @@ int main()
 
 void test_case()
 {
-    assert(0 == 0);
+    assert(get_start("0-0") == 0LL);
+    assert(get_start("123-222") == 123LL);
+    assert(get_finish("0-0") == 0LL);
+    assert(get_finish("123-222") == 222LL);
+
+    vector<pair<long, long>> ex_input = {
+        pair<long, long>(11LL, 22LL),
+        pair<long, long>(95LL, 115LL),
+        pair<long, long>(998LL, 1012LL),
+    };
+    vector<long> ex_output = {11LL, 22LL, 99LL, 1010LL};
+
+    assert(get_invalids(ex_input) == ex_output);
+
+    cout << "tests passed!" << endl;
 }
 
 vector<pair<long, long>> parse_input()
