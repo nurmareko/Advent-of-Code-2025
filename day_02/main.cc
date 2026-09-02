@@ -15,6 +15,7 @@ vector<int> get_invalids(vector<pair<long, long>> ranges);
 long get_start(string range);
 long get_finish(string range);
 void test_case();
+int invalid_id(pair<long, long> range);
 
 int main()
 {
@@ -91,9 +92,23 @@ long get_finish(string range)
 // TODO
 vector<int> get_invalids(vector<pair<long, long>> ranges)
 {
-    for (pair<long, long> id_range: ranges) {
-        cout << "from: " << id_range.first << "to: " << id_range.second << endl;
+    vector<int> invalids = {};
+    for (pair<long, long> range: ranges) {
+        invalids.push_back(invalid_id(range));
     }
 
-    return {};
+    return invalids;
+}
+
+int invalid_id(pair<long, long> range)
+{
+    int result = 0;
+    long start = range.first;
+    long end = range.second;
+
+    for (long n = start; n <= end; n++) {
+        // TODO
+    }
+
+    return result;
 }
