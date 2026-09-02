@@ -11,11 +11,10 @@
 using namespace std;
 
 vector<pair<long, long>> parse_input();
-vector<int> get_invalids(vector<pair<long, long>> ranges);
+vector<long> get_invalids(vector<pair<long, long>> ranges);
 long get_start(string range);
 long get_finish(string range);
 void test_case();
-int invalid_id(pair<long, long> range);
 
 int main()
 {
@@ -23,12 +22,12 @@ int main()
 
     vector<pair<long, long>> ranges = parse_input();
 
-    vector<int> invalids = get_invalids(ranges);
+    vector<long> invalids = get_invalids(ranges);
 
-    long invalid_sum = accumulate(
+    long long invalid_sum = accumulate(
         invalids.begin(),
         invalids.end(),
-        0
+        0LL
     );
 
     cout << "result: " << invalid_sum << endl;
@@ -90,25 +89,31 @@ long get_finish(string range)
 }
 
 // TODO
-vector<int> get_invalids(vector<pair<long, long>> ranges)
+vector<long> get_invalids(vector<pair<long, long>> ranges)
 {
-    vector<int> invalids = {};
+    vector<long> invalids = {};
     for (pair<long, long> range: ranges) {
-        invalids.push_back(invalid_id(range));
+        long start = range.first;
+        long end = range.second;
+        for (long id = start; id <= end; id++) {
+            string current_id = to_string(id);
+            int id_length = current_id.length();
+
+            if (id_length % 2 == 0) {
+                int split_postion = id_length / 2;
+                string x = current_id.substr(0, split_postion);
+                string y = current_id.substr(split_postion, id_length - 1);
+
+                if (x == y) {
+                    invalids.push_back(id);
+                }
+            }
+        }
     }
 
+    // DEBUG
+    // for (long x : invalids) {
+    //     cout << x << endl;
+    // }
     return invalids;
-}
-
-int invalid_id(pair<long, long> range)
-{
-    int result = 0;
-    long start = range.first;
-    long end = range.second;
-
-    for (long n = start; n <= end; n++) {
-        // TODO
-    }
-
-    return result;
 }
